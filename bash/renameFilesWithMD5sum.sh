@@ -22,7 +22,7 @@ for currentFilename in $pathWithFiles/*; do
 	filename="${filename%.*}"
 
 	# for linux
-	md5=`md5sum ${currentFilename} | cut -d ' ' -f 1`
+	md5=`md5sum "${currentFilename}" | cut -d ' ' -f 1`
 	# for a mac
 	# md5=`md5 ${currentFilename} | cut -d ' ' -f 4`
 	#echo "Filename ${filename}  extension ${extension} md5sum ${md5}"
@@ -37,13 +37,13 @@ for currentFilename in $pathWithFiles/*; do
 		# if current file != new file then delete
 		if [ "$currentFilename" != "$newFileName" ]
 		then
-			echo "$currentFilename is a duplicate, delete it"
-			rm $currentFilename
+			echo "$currentFilename is a duplicate of ${md5}"
+			rm "${currentFilename}"
 		fi
 	else
 		# -n no clobber, -i interactive on overwrite (just being cautious)
 		echo "Moving: ${currentFilename} ${newFileName}"
-		mv -n -i $currentFilename $newFileName
+		mv -n -i "${currentFilename}" "${newFileName}"
 	fi
 
 	
